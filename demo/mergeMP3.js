@@ -2,7 +2,7 @@
 const ffmpeg = require("fluent-ffmpeg");
 const path = require('path')
 const { readdir, readFile, writeFile, readdirSync, statSync } = require("fs");
-const {getStringList} =require('./toReadText')
+const {getStringList} =require('./readText')
 
 // var firstFile = "../mp3/1.mp3";
 // var secondFile = "../mp3/2.mp3";
@@ -89,4 +89,5 @@ function writeSrt(str) {
   
 }
 
-mergeAllMp3()
+
+exports.merge=mergeAllMp3

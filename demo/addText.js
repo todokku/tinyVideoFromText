@@ -7,5 +7,6 @@ var video = '../result/tmp.mp4'
 // var add = ffmpeg().input(video).complexFilter('drawtext=:text=welcome:x=(w-text_w)/2:y=(h-40):fontsize=30:fontcolor=black@0.9').save('../result/tmp_addText.mp4')
 
 //导入字幕
-var add = ffmpeg().input(video).complexFilter('subtitles=../srt/test.srt').save('../result/tmp_addText.mp4')
-console.log('ok')
+var add = ffmpeg().input(video).complexFilter('subtitles=../srt/result.srt').save('../result/tmp_addText.mp4')
+
+exports.addText=add

@@ -1,4 +1,9 @@
-const debug = require('./demo/mergeMP3')
+// const debug = require('./demo/mergeMP3')
 
 // debug()
-console.log('index',__dirname)
+
+const {readAll} = require('./demo/readText')
+const {merge} = require('./demo/mergeMP3')
+const {jpgPlusMp3} = require('./demo/jpgPlusMp3')
+const debug = require('./demo/mergeMP3')
+const debug = require('./demo/mergeMP3')
