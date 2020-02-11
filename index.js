@@ -16,7 +16,7 @@ async function main() {
 // await jpgPlusMp3(185.724)
 
 await addText()
-console.log('aa');
+
 }
 
 main()

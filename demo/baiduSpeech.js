@@ -13,7 +13,7 @@ let voice =function (text='待朗读文字',name='tts') {
             if (result.data) {
                 console.log('语音合成成功，文件保存到'+name+'.mp3，打开听听吧');
                 fs.writeFileSync(path.join(__dirname,'../result',name+'.mp3'), result.data);
-                await delay(1)
+                await delay(0.6)
                 res()
             } else {
                 // 合成服务发生错误
