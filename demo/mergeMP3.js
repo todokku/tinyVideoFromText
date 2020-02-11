@@ -22,7 +22,12 @@ function pReadFile(filepath) {
         
       });
 
-      filenames.sort(); // 排序
+      function sortNumber(a,b){//升序
+        a=a.replace('.mp3',"")
+        b=b.replace('.mp3',"")
+        return a - b
+    }
+      filenames.sort(sortNumber); // 排序
       resolve(filenames);
     });
   });
@@ -68,15 +73,15 @@ function formatLists (lists){
     row.end = total
     row.index =index+1
     strResult +=
-`
-${row.index}
-${row.start} --> ${row.end}
+`${row.index}
+${formatSecend(row.start)} --> ${formatSecend(row.end)}
 ${row.content}
+
 `
   }
   console.log(lists)
   writeSrt(strResult)
-
+return total
 }
 
 function writeSrt(str) {
@@ -89,5 +94,30 @@ function writeSrt(str) {
   
 }
 
+function formatSecend(secend) {  
 
+  function p(s) {
+    return s < 10 ? '0' + s: s;
+}
+  var hours = secend  / 60 / 60 
+  var hoursRound = Math.floor(hours);
+  var minutes = secend  / 60 - (60 * hoursRound);
+  var minutesRound = Math.floor(minutes);
+  var seconds = secend   - (60 * 60 * hoursRound) - (60 * minutesRound);
+  var secondsRound =Math.floor(seconds)
+  var micro =Math.floor((secend - Math.floor(secend))*1000) 
+
+  if(micro===0){
+micro='000'
+  }else if(micro>0&&micro<10){
+micro = '00'+ micro
+  }else if(micro>=10&&micro<100){
+    micro = '0'+ micro
+      }
+
+  var time = p(hoursRound) + ':' + p(minutesRound) + ':' + p(secondsRound)+','+micro
+  return time;
+}
+
+// formatSecend(3782.11599999999999)
 exports.merge=mergeAllMp3
