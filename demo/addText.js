@@ -1,12 +1,11 @@
 const ffmpeg = require("fluent-ffmpeg");
 const path = require('path')
 
-// let  mergedPath = path.join(__dirname,'../merged/result.mp3')
-var videopath = path.join(__dirname,'../result/tmp2.mp4') 
+var videopath = path.join(__dirname,'../merged/result_pic.mp4') 
 
 let  srtPath = path.join(__dirname,'../srt/result.srt')
 
-let outputPath= path.join(__dirname,'../result/tmp_addText.mp4')
+let outputPath= path.join(__dirname,'../merged/result_pic_srt.mp4')
 
 
 //添加自定义文字
@@ -14,7 +13,19 @@ let outputPath= path.join(__dirname,'../result/tmp_addText.mp4')
 
 //导入字幕
 var add = function () {
-    ffmpeg().input(videopath).complexFilter('subtitles=./srt/result.srt').save(outputPath)
+    return new Promise((resolve,reject)=>{
+        ffmpeg().input(videopath).complexFilter('subtitles=./srt/result.srt')
+        .on('end', function() {
+            console.log('addText succesfully');
+            resolve()
+          })
+          .on('error', function(err) {
+            console.log('addText an error happened: ' + err.message);
+            reject()
+          })
+          .save(outputPath)
+    })
+    
 } 
 
 exports.addText=add

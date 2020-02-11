@@ -33,35 +33,39 @@ function pReadFile(filepath) {
   });
 }
 
-async function mergeAllMp3() {
-  let filenames=await pReadFile(mp3path)
-  let proc = ffmpeg()
-  let lists=[]
-  for (let index = 0; index < filenames.length; index++) {
-    let file =path.join(__dirname,'../result',filenames[index]) 
-    await  proc.input(file).ffprobe(function(err, data) {
-        console.log('file metadata:');
-        console.log(data.format.duration);
-        let obj={
-          duration:data.format.duration,
-          filename : filenames[index].replace(".mp3","")
-        }
-        lists[index]=obj
-      });
-  }
-  // console.log(lists)
-  proc.on('end', function() {
-    console.log('files have been merged succesfully');
-    formatLists(lists)
+function mergeAllMp3() {
+  return new Promise(async (resolve,reject)=>{
+    let filenames=await pReadFile(mp3path)
+    let proc = ffmpeg()
+    let lists=[]
+    for (let index = 0; index < filenames.length; index++) {
+      let file =path.join(__dirname,'../result',filenames[index]) 
+      await  proc.input(file).ffprobe(function(err, data) {
+          console.log('file metadata:');
+          console.log(data.format.duration);
+          let obj={
+            duration:data.format.duration,
+            filename : filenames[index].replace(".mp3","")
+          }
+          lists[index]=obj
+        });
+    }
+    // console.log(lists)
+    proc.on('end', function() {
+      console.log('files have been merged succesfully');
+      let total = formatLists(lists)
+      resolve(total)
+    })
+    .on('error', function(err) {
+      console.log('an error happened: ' + err.message);
+    })
+    .mergeToFile(outPath);
   })
-  .on('error', function(err) {
-    console.log('an error happened: ' + err.message);
-  })
-  .mergeToFile(outPath);
+  
 }
 
 
-function formatLists (lists){
+async function formatLists (lists){
   let total = 0
   let strResult=""
   let content =getStringList()
@@ -80,17 +84,22 @@ ${row.content}
 `
   }
   console.log(lists)
-  writeSrt(strResult)
+ await writeSrt(strResult)
 return total
 }
 
 function writeSrt(str) {
-  writeFile(path.join(__dirname,'../srt/result.srt'), str, function(err) {
-    if (err) {
-      console.error(err);
-    }
-    console.log("----------新增成功-------------");
-  });
+  return new Promise(async (resolve,reject)=>{
+    writeFile(path.join(__dirname,'../srt/result.srt'), str, function(err) {
+      if (err) {
+        console.error(err);
+        reject(err)
+      }
+      console.log("----------新增成功-------------");
+      resolve()
+    });
+  })
+  
   
 }
 
@@ -119,5 +128,4 @@ micro = '00'+ micro
   return time;
 }
 
-// formatSecend(3782.11599999999999)
 exports.merge=mergeAllMp3

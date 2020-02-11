@@ -8,8 +8,15 @@ const {jpgPlusMp3} = require('./demo/jpgPlusMp3')
 const {addText} = require('./demo/addText')
 // const debug = require('./demo/mergeMP3')
 
-// readAll()
-// let total = merge()
-//185.724
-// jpgPlusMp3(185.724)
-addText()
+
+
+async function main() {
+    // await readAll()
+//  let total =await merge()
+// await jpgPlusMp3(185.724)
+
+await addText()
+console.log('aa');
+}
+
+main()
