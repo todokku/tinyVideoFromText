@@ -11,7 +11,7 @@ const { clearPreviousFiles } = require("./demo/init");
 // const debug = require('./demo/mergeMP3')
 
 async function main() {
-  addAllpics(3);
+  addJpg(10);
   // await readAll()
   //  let total =await merge()
   // await jpgPlusMp3(185.724)

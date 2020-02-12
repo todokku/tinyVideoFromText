@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 
 let mergedPath = path.join(__dirname, "../merged/result.mp3");
-let picPath = path.join(__dirname, "../bg/1.jpg");
+let picPath = path.join(__dirname, "../bg/bg%01d.jpg");
 
 let outputPath = path.join(__dirname, "../merged/result_pic.mp4");
 
@@ -47,9 +47,10 @@ var add = function(time = 20) {
   return new Promise((resolve, reject) => {
     ffmpeg()
       .input(mergedPath)
+      .fps(0.5)
       .input(picPath)
       .loop(time)
-      .fps(25)
+
       .on("end", function() {
         console.log("jpgPlusMp3 succesfully");
         resolve();
