@@ -1,6 +1,4 @@
-
-const {voice} =require('./baiduSpeech')
-
+const { voice } = require("./baiduSpeech");
 
 let str = `疫情之后，房价会如何？
 这是近几天多起来的读者问题。
@@ -44,35 +42,30 @@ let str = `疫情之后，房价会如何？
 
 安心拥有你的房子，或者，认真开始实行你的购房计划。
 有自己一间房子，再小，都更能保障自己的安全与权利。
-繁荣时，可升值，灾难时，可避难。`
+繁荣时，可升值，灾难时，可避难。`;
 
+let getStringList = function() {
+  let arr = str.split(/\n\n/);
+  let content = [];
 
-let getStringList= function (){
-    let arr = str.split(/\n\n/)
-    let content = []
+  arr.forEach(element => {
+    let secend = element.split(/\n/);
+    content.push(...secend);
+  });
 
-    arr.forEach(element => {
-    let secend =  element.split(/\n/)
-    content.push(...secend)
-    });
+  console.log(content);
+  return content;
+};
 
-    console.log(content)
-    return content
-}
-
-
- 
-let readAll=async function () {
-    let content = getStringList()
-    for (let index = 0; index < content.length; index++) {
-       const element = content[index];
-       await voice(element,index)
-    }
-}
-
-
+let readAll = async function() {
+  let content = getStringList();
+  for (let index = 0; index < content.length; index++) {
+    const element = content[index];
+    await voice(element, index);
+  }
+};
 
 // getList()
 
-exports.getStringList=getStringList
-exports.readAll=readAll
+exports.getStringList = getStringList;
+exports.readAll = readAll;

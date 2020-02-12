@@ -1,0 +1,6 @@
+{
+  "prettier.disableLanguages": [
+    "vue"
+    // "javascript",
+  ]
+}
