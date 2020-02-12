@@ -1,7 +1,7 @@
 let AipSpeech = require("baidu-aip-sdk").speech;
 let fs = require("fs");
 const path = require("path");
-const { delay } = require("./timeDelay");
+const { delay } = require("./utils");
 
 // 务必替换百度云控制台中新建百度语音应用的 Api Key 和 Secret Key
 let client = new AipSpeech(

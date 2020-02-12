@@ -3,7 +3,7 @@ const path = require("path");
 
 var videopath = path.join(__dirname, "../merged/result_pic.mp4");
 
-let srtPath = path.join(__dirname, "../srt/result.srt");
+let srtPath = path.join(__dirname, "../merged/result.srt");
 
 let outputPath = path.join(__dirname, "../merged/result_pic_srt.mp4");
 
@@ -15,7 +15,7 @@ var add = function() {
   return new Promise((resolve, reject) => {
     ffmpeg()
       .input(videopath)
-      .complexFilter("subtitles=./srt/result.srt")
+      .complexFilter("subtitles=./merged/result.srt")
       .on("end", function() {
         console.log("addText succesfully");
         resolve();

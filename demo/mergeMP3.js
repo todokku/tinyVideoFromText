@@ -87,7 +87,7 @@ ${row.content}
 
 function writeSrt(str) {
   return new Promise(async (resolve, reject) => {
-    writeFile(path.join(__dirname, "../srt/result.srt"), str, function(err) {
+    writeFile(path.join(__dirname, "../merged/result.srt"), str, function(err) {
       if (err) {
         console.error(err);
         reject(err);

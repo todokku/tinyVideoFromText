@@ -25,4 +25,4 @@ var add = function(time = 20) {
       .save(outputPath);
   });
 };
-exports.jpgPlusMp3 = add;
+exports.addJpg = add;
