@@ -12,6 +12,34 @@ function getAllFile(dir) {
   return files;
 }
 
+function isPic(file) {
+  let ext = path.extname(file).toLowerCase();
+  return ext === ".jpg" || ext === ".jpeg" || ext === ".png" || ext === ".gif";
+}
+function numberFormatZero(num, n) {
+  return (Array(n).join(0) + num).slice(-n);
+}
+
+function bgRename(dirPath) {
+  let absoluteDir = path.resolve(dirPath);
+  let files = fs.readdirSync(dirPath);
+  let numFileCount = 1;
+  for (let index = 0; index < files.length; index++) {
+    const file = files[index];
+    let absoluteFile = path.join(absoluteDir, file);
+    let isFile = fs.statSync(absoluteFile).isFile();
+    if (isFile) {
+      let newname =
+        "bg" +
+        numberFormatZero(numFileCount, 4) +
+        path.extname(file).toLowerCase();
+      fs.renameSync(absoluteFile, path.join(absoluteDir, newname));
+      numFileCount++;
+    }
+  }
+  console.log(absoluteDir + "目录中的图片已经重命名完毕。格式为bg0001.jpg");
+}
+
 function rmAllFiles(dirPath) {
   let absoluteDir = path.resolve(dirPath);
   let files = fs.readdirSync(dirPath);
@@ -28,3 +56,4 @@ function rmAllFiles(dirPath) {
 
 exports.delay = delay;
 exports.rmAllFiles = rmAllFiles;
+exports.bgRename = bgRename;

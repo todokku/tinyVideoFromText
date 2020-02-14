@@ -64,3 +64,5 @@ ffmpeg -y -i result.mp3 -i input1.mp3 -filter_complex amix=inputs=2:duration=lon
 多图
 
 多图切换和滤镜
+
+片头 水印 和片尾

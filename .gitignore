@@ -3,6 +3,7 @@ result/
 mp3/
 mp4/
 bg/
+test/
 *.mp3
 *.mp4
 *.wav
