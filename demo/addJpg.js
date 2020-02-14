@@ -2,7 +2,7 @@ const ffmpeg = require("fluent-ffmpeg");
 const path = require("path");
 const fs = require("fs");
 
-let mergedPath = path.join(__dirname, "../merged/result.mp3");
+let mergedPath = path.join(__dirname, "../merged/result_bgm.mp3");
 let picPath = path.join(__dirname, "../bg/bg%04d.jpg");
 
 let outputPath = path.join(__dirname, "../merged/result_pic.mp4");

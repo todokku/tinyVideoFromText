@@ -1,6 +1,8 @@
 # 文章转为视频
 
-# ffmpeg 命令
+## ffmpeg 命令
+
+#### 多图制作视频
 
 音频加图片，图片循环结束后一直为最后一张
 
@@ -37,7 +39,19 @@ let picPath = path.join(__dirname, "../bg/bg%04d.jpg"); //bg0001.jpg开始
       .save(outputPath);
 ```
 
-# todo
+#### 合并音频
+
+```
+ffmpeg -y -i result.mp3 -i input1.mp3 -filter_complex amerge -ac 2 -c:a libmp3lame -q:a 4 output.mp3 //可以正常合并，长度为短的那个
+
+ffmpeg -y -i result.mp3 -filter_complex "amovie=input1.wav:loop=0,asetpts=N/SR/TB[input1];[0][input1]amix=duration=shortest,volume=1"   out.mp3  //可以合并，将短的重复合并到长的。但是音量为总体控制，1为100%
+
+ffmpeg -y -i input1.mp3 -af volume=-15dB input1.wav  //降低音量
+
+ffmpeg -y -i result.mp3 -i input1.mp3 -filter_complex amix=inputs=2:duration=longest:dropout_transition=3 amix.mp3 //简单合并，已最长为时长，有3秒的过渡退出效果
+```
+
+## todo
 
 美化字幕，最好动画
 

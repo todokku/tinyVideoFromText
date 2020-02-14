@@ -9,6 +9,7 @@ const { getStringList } = require("./readText");
 
 var outPath = path.join(__dirname, "../merged/result.mp3");
 let mp3path = path.join(__dirname, "../result");
+let srtOutputPath = path.join(__dirname, "../merged/result.srt");
 
 function pReadFile(filepath) {
   return new Promise((resolve, reject) => {
@@ -32,7 +33,7 @@ function pReadFile(filepath) {
   });
 }
 
-function mergeAllMp3() {
+function mergeAllMp3(srtOffset = 0) {
   return new Promise(async (resolve, reject) => {
     let filenames = await pReadFile(mp3path);
     let proc = ffmpeg();
@@ -53,7 +54,7 @@ function mergeAllMp3() {
     proc
       .on("end", function() {
         console.log("files have been merged succesfully");
-        let total = formatLists(lists);
+        let total = formatLists(lists, srtOffset);
         resolve(total);
       })
       .on("error", function(err) {
@@ -63,8 +64,8 @@ function mergeAllMp3() {
   });
 }
 
-async function formatLists(lists) {
-  let total = 0;
+async function formatLists(lists, offset = 0) {
+  let total = offset;
   let strResult = "";
   let content = getStringList();
   for (let index = 0; index < lists.length; index++) {
@@ -87,7 +88,7 @@ ${row.content}
 
 function writeSrt(str) {
   return new Promise(async (resolve, reject) => {
-    writeFile(path.join(__dirname, "../merged/result.srt"), str, function(err) {
+    writeFile(srtOutputPath, str, function(err) {
       if (err) {
         console.error(err);
         reject(err);
