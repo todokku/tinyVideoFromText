@@ -14,11 +14,6 @@ let pics = path.join(__dirname, "../bg");
 let changePicSpaceSecond = 3;
 let total = 185;
 
-function getAllFile(dir) {
-  let files = fs.readdirSync(dir);
-  return files;
-}
-
 var add = function(time = 20) {
   return new Promise((resolve, reject) => {
     ffmpeg()
@@ -26,8 +21,11 @@ var add = function(time = 20) {
       .inputOptions("-r 0.5")
       .loop(time)
       .fps(25)
-      .input(mergedPath)
 
+      .input(mergedPath)
+      .videoCodec("libx264")
+      .size("720x?")
+      .aspect("4:3")
       .on("end", function() {
         console.log("jpgPlusMp3 succesfully");
         resolve();

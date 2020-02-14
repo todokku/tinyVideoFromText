@@ -7,6 +7,11 @@ function delay(secends = 1) {
   });
 }
 
+function getAllFile(dir) {
+  let files = fs.readdirSync(dir);
+  return files;
+}
+
 function rmAllFiles(dirPath) {
   let absoluteDir = path.resolve(dirPath);
   let files = fs.readdirSync(dirPath);
