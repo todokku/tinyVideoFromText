@@ -18,8 +18,8 @@ async function main() {
   time = 33.372;
   // await generateBGM(time);
   // await addBgm(time);
-  await addJpg(time);
-  // await addText();
+  // await addJpg(time);
+  await addText();
 }
 
 main();
