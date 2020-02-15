@@ -4,6 +4,7 @@ mp3/
 mp4/
 bg/
 test/
+*.jpg
 *.mp3
 *.mp4
 *.wav
