@@ -17,7 +17,9 @@ function selectPath(dir = path.join(__dirname, "..")) {
   let tempResultFolder = path.join(mainPath, "merged");
   let pathSrt = path.join(tempResultFolder, "result.srt");
   let pathMergedVoices = path.join(tempResultFolder, "mergedVoice.mp3");
-  let pathVoiceAndPic = path.join(tempResultFolder, "voiceAndPic.mp4");
+  let pathBgmReduced = path.join(tempResultFolder, "bgmReduced.mp3");
+  let pathVoiceAndBgm = path.join(tempResultFolder, "voiceAndBgm.mp3");
+  let pathAudioAndPic = path.join(tempResultFolder, "AudioAndPic.mp4");
   let pathFinal = path.join(tempResultFolder, "final.mp4");
 
   const config = {
@@ -29,7 +31,9 @@ function selectPath(dir = path.join(__dirname, "..")) {
     tempResultFolder,
     pathSrt,
     pathMergedVoices,
-    pathVoiceAndPic,
+    pathBgmReduced,
+    pathVoiceAndBgm,
+    pathAudioAndPic,
     pathFinal
   };
   checkPathAndCreate(config);

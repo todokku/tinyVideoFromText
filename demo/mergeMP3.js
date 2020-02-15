@@ -35,7 +35,7 @@ function mergeAllMp3(srtOffset = 0) {
     let lists = [];
     for (let index = 0; index < filenames.length; index++) {
       let file = path.join(tempVoiceFolder, filenames[index]);
-      await proc.input(file).ffprobe(function(err, data) {
+      proc.input(file).ffprobe(function(err, data) {
         // console.log("file metadata:", data.format.duration);
         let obj = {
           duration: data.format.duration,
