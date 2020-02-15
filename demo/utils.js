@@ -7,6 +7,13 @@ function delay(secends = 1) {
   });
 }
 
+function mkdir(dir) {
+  let absoluteDir = path.resolve(dir);
+  if (!fs.existsSync(absoluteDir)) {
+    fs.mkdirSync(absoluteDir);
+  }
+}
+
 function getAllFile(dir) {
   let files = fs.readdirSync(dir);
   return files;
@@ -21,8 +28,14 @@ function numberFormatZero(num, n) {
 }
 
 function bgRename(dirPath) {
-  let absoluteDir = path.resolve(dirPath);
-  let files = fs.readdirSync(dirPath);
+  let absoluteDir = dirPath
+    ? path.resolve(dirPath)
+    : global.config.picInputFolder;
+  let files = fs.readdirSync(absoluteDir);
+  if (!files.length) {
+    console.error("未找到背景图片");
+    return;
+  }
   let numFileCount = 1;
   for (let index = 0; index < files.length; index++) {
     const file = files[index];
@@ -55,5 +68,6 @@ function rmAllFiles(dirPath) {
 }
 
 exports.delay = delay;
+exports.mkdir = mkdir;
 exports.rmAllFiles = rmAllFiles;
 exports.bgRename = bgRename;

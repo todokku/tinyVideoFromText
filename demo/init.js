@@ -2,7 +2,8 @@ const utils = require("./utils");
 const path = require("path");
 
 function clearPreviousFiles() {
-  utils.rmAllFiles("../result");
+  let tempVoiceFolder = global.config.tempVoiceFolder;
+  utils.rmAllFiles(tempVoiceFolder);
   // utils.rmAllFiles("../srt");
   console.log("清除临时文件成功");
 }
@@ -20,6 +21,7 @@ function selectPath(dir = path.join(__dirname, "..")) {
   let pathFinal = path.join(tempResultFolder, "final.mp4");
 
   const config = {
+    mainPath,
     bgmInputFolder,
     bgmInput,
     picInputFolder,
@@ -30,6 +32,15 @@ function selectPath(dir = path.join(__dirname, "..")) {
     pathVoiceAndPic,
     pathFinal
   };
+  checkPathAndCreate(config);
+
+  function checkPathAndCreate(config) {
+    utils.mkdir(config.tempVoiceFolder);
+    utils.mkdir(config.tempResultFolder);
+    utils.mkdir(config.bgmInputFolder);
+    utils.mkdir(config.picInputFolder);
+  }
+
   console.log(config);
   return config;
 }

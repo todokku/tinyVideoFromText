@@ -11,13 +11,14 @@ let client = new AipSpeech(
 );
 
 let voice = function(text = "待朗读文字", name = "tts") {
+  let tempVoiceFolder = global.config.tempVoiceFolder;
   return new Promise((res, rej) => {
     client.text2audio(text, { spd: 6, per: 111 }).then(
       async function(result) {
         if (result.data) {
           console.log("语音合成成功，文件保存到" + name + ".mp3，打开听听吧");
           fs.writeFileSync(
-            path.join(__dirname, "../result", name + ".mp3"),
+            path.join(tempVoiceFolder, name + ".mp3"),
             result.data
           );
           await delay(0.6);
