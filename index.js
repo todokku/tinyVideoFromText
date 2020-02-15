@@ -17,8 +17,8 @@ async function main() {
   // time = await merge();
   time = 33.372;
   // await generateBGM(time);
-  await addBgm(time);
-  // await addJpg(time);
+  // await addBgm(time);
+  await addJpg(time);
   // await addText();
 }
 
