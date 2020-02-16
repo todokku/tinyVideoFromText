@@ -9,16 +9,15 @@ const { addText } = require("./demo/addText");
 
 async function main() {
   global.config = selectPath("./tt"); //写入全局配置文件
-  let time = 60;
-  bgRename();
-
-  clearPreviousFiles();
+  // let time = 60;
+  // bgRename();
+  // clearPreviousFiles();
   await readAll();
-  time = await merge();
-  await generateBGM(time);
-  await addBgm(time);
-  await addJpg(time);
-  await addText();
+  // time = await merge();
+  // await generateBGM(time);
+  // await addBgm(time);
+  // await addJpg(time);
+  // await addText();
 }
 
 main();

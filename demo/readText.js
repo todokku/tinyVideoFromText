@@ -1,3 +1,4 @@
+const fs = require("fs");
 const { voice } = require("./baiduSpeech");
 
 let str = `天天是个小男孩
@@ -54,7 +55,14 @@ let str = `天天是个小男孩
 // 有自己一间房子，再小，都更能保障自己的安全与权利。
 // 繁荣时，可升值，灾难时，可避难。`;
 
+function readTxt(filepath) {
+  let txt = fs.readFileSync(filepath, "utf-8");
+  return txt.replace(/\r/g, "");
+}
+
 let getStringList = function() {
+  let { pathInputTxt } = global.config;
+  str = readTxt(pathInputTxt);
   let arr = str.split(/\n\n/);
   let content = [];
 

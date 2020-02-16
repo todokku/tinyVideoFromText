@@ -16,6 +16,7 @@ function selectPath(dir = path.join(__dirname, "..")) {
   let tempVoiceFolder = path.join(mainPath, "result");
   let tempResultFolder = path.join(mainPath, "merged");
   let pathPicTemple = picInputFolder + "/bg%04d.jpg";
+  let pathInputTxt = path.join(bgmInputFolder, "input.txt");
   let pathSrt = path.join(tempResultFolder, "result.srt");
   let pathSrtComplex = formatComplexPath(pathSrt);
   let pathMergedVoices = path.join(tempResultFolder, "mergedVoice.mp3");
@@ -37,6 +38,7 @@ function selectPath(dir = path.join(__dirname, "..")) {
     picInputFolder,
     tempVoiceFolder,
     tempResultFolder,
+    pathInputTxt,
     pathPicTemple,
     pathSrt,
     pathSrtComplex,
