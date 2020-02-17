@@ -51,6 +51,14 @@ ffmpeg -y -i input1.mp3 -af volume=-15dB input1.wav  //降低音量
 ffmpeg -y -i result.mp3 -i input1.mp3 -filter_complex amix=inputs=2:duration=longest:dropout_transition=3 amix.mp3 //简单合并，已最长为时长，有3秒的过渡退出效果
 ```
 
+字幕调整
+
+```
+ffmpeg -y -i AudioAndPic.mp4 -filter_complex "subtitles=result.srt:force_style='MarginV=100,Fontsize=35'" output.mp4
+
+给test.mp4添加字幕，同时字幕字体的大小为11px，如果还需要设置字幕的位置，字体，阴影等可以直接在Fontsize=11后面直接拼接即可。Shadow=0,MarginV=20代表阴影为1，距离下边距为20px
+```
+
 ## todo
 
 美化字幕，最好动画

@@ -20,10 +20,12 @@ let getStringList = function() {
   let arr = str.split(/\n\n/);
   let content = [];
 
-  arr.forEach(element => {
-    let secend = element.split(/\n/);
-    content.push(...secend);
-  });
+  // arr.forEach(element => {
+  //   let secend = element.split(/\n/);
+  //   content.push(...secend);
+  // });
+  content = arr;
+
   content = content.filter(ele => !ele.match(/^[ ]*$/)); //去除空行和纯空格行
 
   console.log(content);

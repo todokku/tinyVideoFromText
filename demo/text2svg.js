@@ -1,9 +1,17 @@
+const path = require("path");
 const TextToSVG = require("text-to-svg");
 const sharp = require("sharp");
-const textToSVG = TextToSVG.loadSync();
 
-function stringToPng(str = "hello", filename = "cover.png") {
-  const attributes = { fill: "red", stroke: "black" };
+function stringToPng(str = "hello") {
+  let pathFont = path.join(__dirname, "..", "fonts", "font.otf");
+  let pathInputCover = global.config.pathInputCover;
+  const textToSVG = TextToSVG.loadSync(pathFont);
+  const attributes = {
+    fill: "white",
+    stroke: "black",
+    width: 800,
+    height: 600
+  };
   const options = {
     x: 0,
     y: 0,
@@ -18,8 +26,12 @@ function stringToPng(str = "hello", filename = "cover.png") {
   let buffer = Buffer.from(svg);
 
   sharp(buffer)
-    .png()
-    .toFile("new-file.png")
+    // .png()
+    .jpeg({
+      quality: 90,
+      chromaSubsampling: "4:4:4"
+    })
+    .toFile(pathInputCover)
     .then(function(info) {
       console.log(info);
     })
@@ -27,3 +39,5 @@ function stringToPng(str = "hello", filename = "cover.png") {
       console.log(err);
     });
 }
+
+exports.stringToPng = stringToPng;

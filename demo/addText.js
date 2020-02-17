@@ -18,7 +18,11 @@ var add = function() {
   return new Promise((resolve, reject) => {
     ffmpeg()
       .input(pathAudioAndPic)
-      .complexFilter("subtitles='" + pathSrtComplex + "'")
+      .complexFilter(
+        "subtitles='" +
+          pathSrtComplex +
+          "':force_style='MarginV=100,MarginL=10,MarginR=10'"
+      )
       // .complexFilter("subtitles=./merged/result.srt")
       .on("end", function() {
         console.log("addText succesfully");
