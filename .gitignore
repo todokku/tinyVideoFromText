@@ -5,6 +5,8 @@ mp4/
 bg/
 test/
 *.jpg
+*.png
+*.svg
 *.mp3
 *.mp4
 *.wav

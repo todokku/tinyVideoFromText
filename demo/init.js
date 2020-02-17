@@ -8,9 +8,9 @@ function clearPreviousFiles() {
   console.log("清除临时文件成功");
 }
 
-function selectPath(dir = path.join(__dirname, "..")) {
+function initPath(dir = path.join(__dirname, "..")) {
   let mainPath = path.resolve(dir);
-  let bgmInputFolder = path.join(mainPath, "bgm");
+  let bgmInputFolder = path.join(mainPath, "input");
   let bgmInput = path.join(bgmInputFolder, "bgm.mp3");
   let picInputFolder = path.join(mainPath, "pic");
   let tempVoiceFolder = path.join(mainPath, "result");
@@ -61,5 +61,5 @@ function selectPath(dir = path.join(__dirname, "..")) {
   return config;
 }
 
-exports.selectPath = selectPath;
+exports.initPath = initPath;
 exports.clearPreviousFiles = clearPreviousFiles;
