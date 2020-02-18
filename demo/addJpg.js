@@ -12,7 +12,7 @@ var add = function(time = 20) {
       .input(pathVoiceAndBgm)
       .videoCodec("libx264")
       .size("1200x?")
-      .aspect("4:3")
+      .aspect("16:9")
       .on("end", function() {
         console.log("jpgPlusMp3 succesfully");
         resolve();

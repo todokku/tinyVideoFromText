@@ -1,4 +1,4 @@
-const { bgRename } = require("./demo/utils");
+const { bgRename, renameBot } = require("./demo/utils");
 
 const { initPath, clearPreviousFiles } = require("./demo/init");
 const { stringToPng } = require("./demo/text2svg");
@@ -9,19 +9,18 @@ const { addJpg } = require("./demo/addJpg");
 const { addText } = require("./demo/addText");
 
 async function main() {
-  global.config = initPath("./tt"); //写入全局配置文件
-  let time = 225.396;
-  bgRename();
-  clearPreviousFiles();
+  // global.config = initPath("./tt"); //写入全局配置文件
+  // let time = 225.396;
+  // bgRename();
+  // clearPreviousFiles();
+  // await readAll();
+  // time = await merge();
+  // await generateBGM(time);
+  // await addBgm(time);
+  // await addJpg(time);
+  // await addText();
 
-  await readAll();
-  time = await merge();
-  await generateBGM(time);
-  await addBgm(time);
-  await addJpg(time);
-  await addText();
-
-  // stringToPng("这是什么文字");
+  renameBot("D:/pic");
 }
 
 main();
