@@ -20,10 +20,6 @@ let getStringList = function() {
   let arr = str.split(/\n\n/);
   let content = [];
 
-  // arr.forEach(element => {
-  //   let secend = element.split(/\n/);
-  //   content.push(...secend);
-  // });
   content = arr;
 
   content = content.filter(ele => !ele.match(/^[ ]*$/)); //去除空行和纯空格行
@@ -34,6 +30,34 @@ let getStringList = function() {
 };
 
 function splitText(content, singleLineLimit = 26, linesLimit = 4) {
+  function danjuchaiduan(str) {
+    let tempStr = "";
+    const oneSentence = str;
+    let beishu = oneSentence.length / singleLineLimit;
+    for (let j = 0; j < beishu; j++) {
+      let raw = oneSentence.slice(
+        j * singleLineLimit,
+        (j + 1) * singleLineLimit
+      );
+      tempStr += raw + (j >= beishu - 1 ? "" : "\n");
+    }
+    return tempStr;
+  }
+
+  function duojuchaiduan(str) {
+    let n = str / (singleLineLimit * linesLimit);
+    let arr = [];
+    for (let index = 0; index < n; index++) {
+      let one = oneSentence.slice(
+        index * singleLineLimit * linesLimit,
+        (index + 1) * singleLineLimit * linesLimit
+      );
+      one = danjuchaiduan(one);
+      arr.push(one);
+    }
+    return arr;
+  }
+
   let paraCac = [];
   for (let index = 0; index < content.length; index++) {
     const para = content[index];
@@ -49,51 +73,65 @@ function splitText(content, singleLineLimit = 26, linesLimit = 4) {
           sentences[i] !== "，" &&
           sentences[i] !== "、" &&
           sentences[i] !== "：" &&
-          sentences[i] !== "？"
+          sentences[i] !== "？" &&
+          sentences[i] !== '"' &&
+          sentences[i] !== "'" &&
+          sentences[i] !== "“" &&
+          sentences[i] !== "”" &&
+          sentences[i] !== "." &&
+          sentences[i] !== "?" &&
+          sentences[i] !== ")" &&
+          sentences[i] !== "）"
         ) {
           const oneSentence = sentences[i] + "。";
-          if (oneSentence.length < singleLineLimit) {
-            mycak.push(oneSentence + "\n");
+
+          if (oneSentence.length <= singleLineLimit + 1) {
+            paraCac.push(oneSentence);
           } else {
-            let beishu = oneSentence.length / singleLineLimit;
-            for (let j = 0; j < beishu; j++) {
-              let raw = oneSentence.slice(
-                j * singleLineLimit,
-                (j + 1) * singleLineLimit
-              );
-              mycak.push(raw + "\n");
+            if (oneSentence.length > singleLineLimit * linesLimit) {
+              let halfSentences = oneSentence.split(/，/);
+              for (let haIndex = 0; haIndex < halfSentences.length; haIndex++) {
+                const halfSentence = halfSentences[haIndex];
+                if (halfSentence.length < singleLineLimit) {
+                  paraCac.push(halfSentence);
+                } else {
+                  if (halfSentence.length > singleLineLimit * linesLimit) {
+                    let arr = duojuchaiduan(halfSentence);
+                    paraCac.push(...arr);
+                  } else {
+                    let tempStr = danjuchaiduan(halfSentence);
+                    paraCac.push(tempStr);
+                  }
+                }
+              }
+            } else {
+              let tempStr = danjuchaiduan(oneSentence);
+              paraCac.push(tempStr);
             }
           }
         }
       }
 
-      let suoyin = 1;
-      let cacone = "";
-      let cacArr = [];
-      for (let k = 0; k < mycak.length; k++) {
-        if (k < suoyin * linesLimit) {
-          cacone += mycak[k];
-          if (k === mycak.length - 1) {
-            cacArr.push(cacone);
-          }
-        } else {
-          cacArr.push(cacone);
-          cacone = mycak[k];
-          suoyin++;
-        }
-      }
-      paraCac.push(...cacArr);
+      // let suoyin = 1;
+      // let cacone = "";
+      // let cacArr = [];
+      // for (let k = 0; k < mycak.length; k++) {
+      //   if (k < suoyin * linesLimit) {
+      //     cacone += mycak[k];
+      //     if (k === mycak.length - 1) {
+      //       cacArr.push(cacone);
+      //     }
+      //   } else {
+      //     cacArr.push(cacone);
+      //     cacone = mycak[k];
+      //     suoyin++;
+      //   }
+      // }
+      // paraCac.push(...cacArr);
     } else {
       let tempStr = "";
-      const oneSentence = para;
-      let beishu = oneSentence.length / singleLineLimit;
-      for (let j = 0; j < beishu; j++) {
-        let raw = oneSentence.slice(
-          j * singleLineLimit,
-          (j + 1) * singleLineLimit
-        );
-        tempStr += raw + "\n";
-      }
+
+      tempStr = danjuchaiduan(para);
       paraCac.push(tempStr);
     }
   }
