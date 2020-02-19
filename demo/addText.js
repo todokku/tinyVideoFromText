@@ -21,8 +21,9 @@ var add = function() {
       .complexFilter(
         "subtitles='" +
           pathSrtComplex +
-          "':force_style='MarginV=100,MarginL=10,MarginR=10'"
+          "':force_style='Fontsize=22,PrimaryColour=&H11FFFFFF,OutlineColour=&H440000EE,Alignment=10,BorderStyle=1,Outline=1,Shadow=0,Spacing=1'"
       )
+      //MarginV=100,TertiaryColour=333333
       // .complexFilter("subtitles=./merged/result.srt")
       .on("end", function() {
         console.log("addText succesfully");

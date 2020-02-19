@@ -28,9 +28,72 @@ let getStringList = function() {
 
   content = content.filter(ele => !ele.match(/^[ ]*$/)); //去除空行和纯空格行
 
+  // content = splitText(content)
   console.log(content);
   return content;
 };
+
+function splitText(content, singleLineLimit = 26, linesLimit = 4) {
+  let paraCac = [];
+  for (let index = 0; index < content.length; index++) {
+    const para = content[index];
+    if (para.length > singleLineLimit * linesLimit) {
+      let sentences = para.split(/。/);
+      let count = 0,
+        cur = 0;
+      let mycak = [];
+      let lastMerge = "";
+      for (let i = 0; i < sentences.length; i++) {
+        const oneSentence = sentences[i];
+        if (oneSentence.length < singleLineLimit) {
+          mycak.push(oneSentence + "\n");
+        } else {
+          let beishu = oneSentence.length / singleLineLimit + 1;
+          for (let j = 0; j < beishu; j++) {
+            let raw = oneSentence.slice(
+              j * singleLineLimit,
+              (j + 1) * singleLineLimit - 1
+            );
+            mycak.push(raw + "\n");
+          }
+        }
+      }
+
+      let suoyin = 1;
+      let cacone = "";
+      let cacArr = [];
+      for (let k = 0; k < mycak.length; k++) {
+        if (k < suoyin * linesLimit) {
+          cacone += mycak[k];
+          if (k === mycak.length - 1) {
+            cacArr.push(cacone);
+          }
+        } else {
+          cacArr.push(cacone);
+          cacone = mycak[k];
+          suoyin++;
+        }
+      }
+      paraCac.push(...cacArr);
+    } else {
+      let mycak = [];
+      for (let i = 0; i < sentences.length; i++) {
+        const oneSentence = para;
+
+        let beishu = oneSentence.length / singleLineLimit + 1;
+        for (let j = 0; j < beishu; j++) {
+          let raw = oneSentence.slice(
+            j * singleLineLimit,
+            (j + 1) * singleLineLimit - 1
+          );
+          mycak.push(raw + "\n");
+        }
+      }
+    }
+  }
+
+  return content;
+}
 
 let readAll = async function() {
   let content = getStringList();

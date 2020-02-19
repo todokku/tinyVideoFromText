@@ -57,7 +57,23 @@ ffmpeg -y -i result.mp3 -i input1.mp3 -filter_complex amix=inputs=2:duration=lon
 ffmpeg -y -i AudioAndPic.mp4 -filter_complex "subtitles=result.srt:force_style='MarginV=100,Fontsize=35'" output.mp4
 
 给test.mp4添加字幕，同时字幕字体的大小为11px，如果还需要设置字幕的位置，字体，阴影等可以直接在Fontsize=11后面直接拼接即可。Shadow=0,MarginV=20代表阴影为1，距离下边距为20px
+
+ffmpeg -y -i AudioAndPic.mp4 -filter_complex "subtitles=result.srt:force_style='MarginL=10,MarginR=10,PrimaryColour=&H22EEEEEE,SecondaryColour=&H22e7da75,OutlineColor=&H22e7da75,BackColour=&H22e7da75,Spacing=1,Alignment=10,Outline=2'" output.mp4
+
+居中可以，描边颜色不对
+
 ```
+
+参数中不能包含空格！！！！和中文逗号
+
+test:
+
+```
+ffmpeg -y -i AudioAndPic.mp4 -filter_complex "subtitles=result.srt:force_style='Fontsize=22,PrimaryColour=&H11FFFFFF,OutlineColour=&H440000EE,Alignment=10,BorderStyle=1,Outline=1,Shadow=0,Spacing=1'" output.mp4
+
+```
+
+Alignment=7 为右上角 =10 为中间
 
 ## todo
 

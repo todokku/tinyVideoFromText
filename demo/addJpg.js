@@ -7,11 +7,11 @@ var add = function(time = 20) {
       .input(pathPicTemple)
       .inputOptions("-r 0.15")
       .loop(time)
-      .fps(25)
+      .fps(24)
 
       .input(pathVoiceAndBgm)
       .videoCodec("libx264")
-      .size("1200x?")
+      .size("1280x720")
       .aspect("16:9")
       .on("end", function() {
         console.log("jpgPlusMp3 succesfully");

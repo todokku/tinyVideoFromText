@@ -9,18 +9,16 @@ const { addJpg } = require("./demo/addJpg");
 const { addText } = require("./demo/addText");
 
 async function main() {
-  // global.config = initPath("./tt"); //写入全局配置文件
-  // let time = 225.396;
-  // bgRename();
-  // clearPreviousFiles();
-  // await readAll();
-  // time = await merge();
-  // await generateBGM(time);
-  // await addBgm(time);
-  // await addJpg(time);
-  // await addText();
-
-  renameBot("D:/pic");
+  global.config = initPath("./0218"); //写入全局配置文件
+  let time = 230.4;
+  bgRename();
+  clearPreviousFiles();
+  await readAll();
+  time = await merge();
+  await generateBGM(time);
+  await addBgm(time);
+  await addJpg(time);
+  await addText();
 }
 
 main();
