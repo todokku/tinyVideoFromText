@@ -75,18 +75,50 @@ ffmpeg -y -i AudioAndPic.mp4 -filter_complex "subtitles=result.srt:force_style='
 
 Alignment=7 为右上角 =10 为中间
 
+封面单图生成视频：
+
+```
+
+ffmpeg -loop 1 -f image2 -i cover.png -vcodec libx264 -r 24 -t 1 cover.mp4
+```
+
+视频拼接：
+
+```
+ffmpeg -f concat -i list.txt -c copy out.mp4
+
+3个拼接的demo
+ffmpeg -i input1.mp4 -i input2.webm -i input3.mov \
+-filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[outv][outa]" \
+-map "[outv]" -map "[outa]" output.mkv
+
+ffmpeg -i cover.mp4 -i final.mp4 -filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[outv][outa]" -map "[outv]" -map "[outa]" output4.mp4
+
+ffmpeg -i cover.mp4 -i final.mp4 -filter_complex "[0:0][1:0][1:0]concat=n=2:v=1:a=1[outv][outa]" -map "[outv]" -map "[outa]" output4.mp4
+
+ffmpeg -i cover.mp4 -i final.mp4  -filter_complex '[0:0] [0:1] [0:2] [1:0] [1:1] [1:2] concat=n=2:v=1:a=2 [v] [a1] [a2]'  -map '[v]' -map '[a1]' -map '[a2]' output.mkv
+
+ffmpeg -f concat -i list.txt -c copy -map 0:v:0 -map 1:v:0 -map 1:a:0 output.mp4
+```
+
 ## todo
 
-美化字幕，最好动画
+- [ ] 美化字幕，最好动画
 
-字幕超长遮挡
+- [x] 字幕超长遮挡
 
-文章自动断句。
+- [x] 文章自动断句。
 
-文章自动抓取分析。
+- [ ] 文章自动抓取分析。
 
-多图
+- [x] 多图
 
-多图切换和滤镜
+- [ ] 多图切换和滤镜
 
-片头 水印 和片尾
+- [ ] 片头 水印 和片尾
+
+用什么方式：
+
+1. 将片头图片作为背景图的一张。需要保证图片不循环，同时添加固定一张图片为片头。标题文字用 drawtext 或者是图片通过 svg 叠加生成。语音和字幕增加固定秒数的偏移量。（现在图片结果为 7 秒，做片头太长。）
+
+2. 将图片生成同尺寸视频，然后视频拼接。（图像压制多一次，性能差）。这里音频

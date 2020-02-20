@@ -1,0 +1,2 @@
+file 'cover.mp4'
+file 'final.mp4'
