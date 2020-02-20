@@ -1,13 +1,13 @@
-const { bgRename, renameBot } = require("./demo/utils");
+const { bgRename, renameBot } = require("./src/utils");
 
-const { initPath, clearPreviousFiles } = require("./demo/init");
-const { stringToPng } = require("./demo/text2svg");
-const { readAll } = require("./demo/readText");
-const { merge } = require("./demo/mergeMP3");
-const { randomBgCopy } = require("./demo/randomBgCopy");
-const { addBgm, generateBGM } = require("./demo/addBgm");
-const { addJpg } = require("./demo/addJpg");
-const { addText } = require("./demo/addText");
+const { initPath, clearPreviousFiles } = require("./src/init");
+const { stringToPng } = require("./src/text2svg");
+const { readAll } = require("./src/readText");
+const { merge } = require("./src/mergeMP3");
+const { randomBgCopy } = require("./src/randomBgCopy");
+const { addBgm, generateBGM } = require("./src/addBgm");
+const { addJpg } = require("./src/addJpg");
+const { addText } = require("./src/addText");
 
 async function main() {
   global.config = initPath("./0220"); //写入全局配置文件
