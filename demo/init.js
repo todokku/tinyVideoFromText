@@ -13,6 +13,7 @@ function initPath(dir = path.join(__dirname, "..")) {
   let bgmInputFolder = path.join(mainPath, "input");
   let bgmInput = path.join(bgmInputFolder, "bgm.mp3");
   let picInputFolder = path.join(mainPath, "pic");
+  let picAllSourceFolder = path.resolve("/picall");
   let tempVoiceFolder = path.join(mainPath, "result");
   let tempResultFolder = path.join(mainPath, "merged");
   let pathPicTemple = picInputFolder + "/bg%04d.jpg";
@@ -38,6 +39,7 @@ function initPath(dir = path.join(__dirname, "..")) {
     bgmInputFolder,
     bgmInput,
     picInputFolder,
+    picAllSourceFolder,
     tempVoiceFolder,
     tempResultFolder,
     pathInputCover,

@@ -57,7 +57,8 @@ function bgRename(dirPath) {
     : global.config.picInputFolder;
   let files = fs.readdirSync(absoluteDir);
   if (!files.length) {
-    console.error("未找到背景图片");
+    console.error("未找到背景图片，之后进行随机挑选");
+
     return;
   } else {
     let existBgArr = files.filter(file => file.substring(0, 2) === "bg");
@@ -88,7 +89,9 @@ function bgRename(dirPath) {
       numFileCount++;
     }
   }
-  console.log(absoluteDir + "目录中的图片已经重命名完毕。格式为bg0001.jpg");
+  console.log(
+    "目录'" + absoluteDir + "'中的图片已经重命名完毕。格式为bg0001.jpg.."
+  );
 }
 
 function rmAllFiles(dirPath) {
