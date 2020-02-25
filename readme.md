@@ -16,7 +16,7 @@ var client = new AipSpeechClient(APP_ID, API_KEY, SECRET_KEY);
 
 ### 2.准备输入文件和参数
 
-执行 `npm i` 安装依赖。
+执行 `npm i` 安装依赖。还需要安装 ffmpeg 并配置系统变量 path，至命令行窗口输入 `ffmpeg` 能找到程序为止。
 
 复制 templete 目录并粘贴，重命名为如'0225'目录，修改其中的 input/input.txt 为你想要制作的文章。（如示例段落间放一个空行方便分段）。
 
