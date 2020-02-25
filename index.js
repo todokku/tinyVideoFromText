@@ -10,7 +10,7 @@ const { addJpg } = require("./src/addJpg");
 const { addText } = require("./src/addText");
 
 async function main() {
-  global.config = initPath("./0225"); //写入全局配置文件
+  global.config = initPath("./0226"); //写入全局配置文件
   let time = 250.956;
   clearPreviousFiles();
   await readAll();
