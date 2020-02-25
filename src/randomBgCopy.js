@@ -2,10 +2,6 @@
 const path = require("path");
 const {
   readdir,
-  readFile,
-  writeFile,
-  readdirSync,
-  statSync,
   copyFileSync
 } = require("fs");
 

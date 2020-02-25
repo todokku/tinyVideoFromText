@@ -1,5 +1,7 @@
 const fs = require("fs");
 const { voice } = require("./baiduSpeech");
+const jschardet = require("jschardet");
+const Iconv = require("iconv").Iconv;
 
 let str = `疫情之后，房价会如何？
 这是近几天多起来的读者问题。
@@ -11,6 +13,13 @@ let str = `疫情之后，房价会如何？
 
 function readTxt(filepath) {
   let txt = fs.readFileSync(filepath, "utf-8");
+  // let t = jschardet.detect(txt);
+  // console.log(t.encoding);
+  // if (t.encoding !== "utf-8") {
+  //   let iconv = new Iconv(t.encoding, "utf-8");
+  //   txt = iconv.convert(txt);
+  // }
+  console.log(txt);
   return txt.replace(/\r/g, "");
 }
 
